@@ -1,0 +1,15 @@
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\CineAPI.DAL.csproj.AssemblyReference.cache
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\CineAPI.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\CineAPI.DAL.AssemblyInfoInputs.cache
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\CineAPI.DAL.AssemblyInfo.cs
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\CineAPI.DAL.csproj.CoreCompileInputs.cache
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\bin\Debug\net7.0\CineAPI.DAL.deps.json
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\bin\Debug\net7.0\CineAPI.DAL.dll
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\bin\Debug\net7.0\CineAPI.DAL.pdb
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\CineAPI.DAL.dll
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\refint\CineAPI.DAL.dll
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\CineAPI.DAL.pdb
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\ref\CineAPI.DAL.dll
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\bin\Debug\net7.0\CineAPI.Entities.dll
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\bin\Debug\net7.0\CineAPI.Entities.pdb
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.DAL\obj\Debug\net7.0\CineAPI.DAL.csproj.CopyComplete

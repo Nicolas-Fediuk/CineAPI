@@ -1,0 +1,12 @@
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\bin\Debug\net7.0\CineAPI.Entities.deps.json
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\bin\Debug\net7.0\CineAPI.Entities.dll
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\bin\Debug\net7.0\CineAPI.Entities.pdb
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\obj\Debug\net7.0\CineAPI.Entities.csproj.AssemblyReference.cache
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\obj\Debug\net7.0\CineAPI.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\obj\Debug\net7.0\CineAPI.Entities.AssemblyInfoInputs.cache
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\obj\Debug\net7.0\CineAPI.Entities.AssemblyInfo.cs
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\obj\Debug\net7.0\CineAPI.Entities.csproj.CoreCompileInputs.cache
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\obj\Debug\net7.0\CineAPI.Entities.dll
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\obj\Debug\net7.0\refint\CineAPI.Entities.dll
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\obj\Debug\net7.0\CineAPI.Entities.pdb
+C:\Users\nfediuk\Desktop\CineAPI\CineAPI.Entities\obj\Debug\net7.0\ref\CineAPI.Entities.dll
