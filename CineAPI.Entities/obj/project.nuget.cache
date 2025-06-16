@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "bSeY0635RK5+BOxyucR05wISnSbkwwgdoXfMWJn4w1zR3C78NGUV6smtea9gD38mk8mXPBhaFxw+UmAqDfgyUw==",
+  "dgSpecHash": "4Su7kD3YIHFfCuG1dcJNwDjiEC31ibTdapbg9HvgsqyWG7AebfwoWUbOCRh5h3+wnPs55GJmhNyehc/rArxQ9w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI.Entities\\CineAPI.Entities.csproj",
+  "projectFilePath": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI.Entities\\CineAPI.Entities.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\nfediuk\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
-    "C:\\Users\\nfediuk\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
-    "C:\\Users\\nfediuk\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+    "C:\\Users\\nico\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\nico\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\nico\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
   ],
   "logs": []
 }

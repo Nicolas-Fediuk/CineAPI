@@ -158,5 +158,11 @@ select * from ROLES_USUARIOS
 
 select * from CREDENCIALES
 
+select * from FUNCIONES
+
+insert into PELICULAS(PELI_GUID,PELI_TITULO,PELI_DESCRIP, PELI_POSTER, PELI_GENEROID)
+VALUES('109e299c-f652-4393-bfcf-eb4811f432cf','Avenger:doomsday','Catorce meses después de los eventos de Thunderbolts* (2025), los Vengadores, los wakandianos, los Cuatro Fantásticos, los Nuevos Vengadores y los X-Men originales se unen para enfrentarse al Doctor Muerte','https://localhost:7151/posterPeliculas/668d04d5-b1f5-4c2c-83f6-2cd9cdf19815.PNG',1)
+
+
 
 

@@ -470,5 +470,32 @@ namespace CineAPI.Datos.ADO.NET
             }
             
         }
+
+        public async Task EditarFuncion(string id, FuncionDTO funcionDTO)
+        {
+            conexionSQL.AddParameter("id", DbType.String, id);
+            conexionSQL.AddParameter("pelicula", DbType.String, funcionDTO.FUNCION_PELICULA);
+            conexionSQL.AddParameter("sala", DbType.Int32, funcionDTO.FUNCION_SALA);
+            conexionSQL.AddParameter("fecha", DbType.DateTime, funcionDTO.FUNCION_FECHA);
+            conexionSQL.AddParameter("hora", DbType.Time, funcionDTO.FUNCION_HORA);
+            conexionSQL.AddParameter("duracion", DbType.Time, funcionDTO.FUNCION_DURACION);
+
+            string query = @"update FUNCIONES 
+                             set FUNCION_PELIGUID = @pelicula,
+                            FUNCION_SALAID = @sala,
+                            FUNCION_FECHA = @fecha,
+                            FUNCION_HORA = @hora,
+                            FUNCION_DURACION = @duracion
+                            where FUNCION_GUID = @id";
+            try
+            {
+               await conexionSQL.ExecuteQueryWithParameters(query);
+            }
+            catch(Exception ex)
+            {
+                logger.LogError($"Error al modificar la funcion: {ex.Message}");
+                throw;
+            }
+        }
     }
 }

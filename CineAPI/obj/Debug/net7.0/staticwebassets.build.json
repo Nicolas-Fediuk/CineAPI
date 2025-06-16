@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7WtARYtqjvTFpH7oOMc4QkFiTEey6EtBnlxT4bJFpbU=",
+  "Hash": "wSOIoKJqc59ItE6fvxXraW/cdZ/JeiYnraECD24DKTY=",
   "Source": "CineAPI",
   "BasePath": "_content/CineAPI",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "CineAPI\\wwwroot",
       "Source": "CineAPI",
-      "ContentRoot": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
       "BasePath": "_content/CineAPI",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\0910aec4-8074-4661-843a-0c8d497bad41.png",
+      "Identity": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\0910aec4-8074-4661-843a-0c8d497bad41.png",
       "SourceId": "CineAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
       "BasePath": "_content/CineAPI",
       "RelativePath": "posterPeliculas/0910aec4-8074-4661-843a-0c8d497bad41.png",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\posterPeliculas\\0910aec4-8074-4661-843a-0c8d497bad41.png"
     },
     {
-      "Identity": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\43283c44-c4cb-4f26-8487-40924ee9fb29.png",
+      "Identity": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\43283c44-c4cb-4f26-8487-40924ee9fb29.png",
       "SourceId": "CineAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
       "BasePath": "_content/CineAPI",
       "RelativePath": "posterPeliculas/43283c44-c4cb-4f26-8487-40924ee9fb29.png",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\posterPeliculas\\43283c44-c4cb-4f26-8487-40924ee9fb29.png"
     },
     {
-      "Identity": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\668d04d5-b1f5-4c2c-83f6-2cd9cdf19815.PNG",
+      "Identity": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\668d04d5-b1f5-4c2c-83f6-2cd9cdf19815.PNG",
       "SourceId": "CineAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
       "BasePath": "_content/CineAPI",
       "RelativePath": "posterPeliculas/668d04d5-b1f5-4c2c-83f6-2cd9cdf19815.PNG",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\posterPeliculas\\668d04d5-b1f5-4c2c-83f6-2cd9cdf19815.PNG"
     },
     {
-      "Identity": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\6acca511-1c78-48f6-901e-d158cf6c5e45.png",
+      "Identity": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\6acca511-1c78-48f6-901e-d158cf6c5e45.png",
       "SourceId": "CineAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
       "BasePath": "_content/CineAPI",
       "RelativePath": "posterPeliculas/6acca511-1c78-48f6-901e-d158cf6c5e45.png",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\posterPeliculas\\6acca511-1c78-48f6-901e-d158cf6c5e45.png"
     },
     {
-      "Identity": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\c542f31f-7e86-49ce-b972-8cd5b86a4e99.png",
+      "Identity": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\c542f31f-7e86-49ce-b972-8cd5b86a4e99.png",
       "SourceId": "CineAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
       "BasePath": "_content/CineAPI",
       "RelativePath": "posterPeliculas/c542f31f-7e86-49ce-b972-8cd5b86a4e99.png",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\posterPeliculas\\c542f31f-7e86-49ce-b972-8cd5b86a4e99.png"
     },
     {
-      "Identity": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\de9ee7d8-217a-4f90-95ac-e7ef2baee1ca.PNG",
+      "Identity": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\posterPeliculas\\de9ee7d8-217a-4f90-95ac-e7ef2baee1ca.PNG",
       "SourceId": "CineAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\wwwroot\\",
       "BasePath": "_content/CineAPI",
       "RelativePath": "posterPeliculas/de9ee7d8-217a-4f90-95ac-e7ef2baee1ca.PNG",
       "AssetKind": "All",

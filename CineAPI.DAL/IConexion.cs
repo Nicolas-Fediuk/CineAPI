@@ -8,6 +8,7 @@ namespace CineAPI.Datos
     public interface IConexion
     {
         Task<List<UsuarioDTO>> BuscarGeneroDescrip(List<UsuarioDTO> usuarioDTOs);
+        Task EditarFuncion(string id, FuncionDTO funcionDTO);
         Task<bool> EliminarFuncion(string id);
         Task EliminarPelicula(string guid);
         Task<bool> ExisteFuncion(string id);

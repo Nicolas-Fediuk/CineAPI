@@ -3108,23 +3108,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nfediuk\\.nuget\\packages\\": {},
+    "C:\\Users\\nico\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\CineAPI.csproj",
+      "projectUniqueName": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\CineAPI.csproj",
       "projectName": "CineAPI",
-      "projectPath": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\CineAPI.csproj",
-      "packagesPath": "C:\\Users\\nfediuk\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI\\obj\\",
+      "projectPath": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\CineAPI.csproj",
+      "packagesPath": "C:\\Users\\nico\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\nfediuk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nico\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3139,11 +3139,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI.DAL\\CineAPI.DAL.csproj": {
-              "projectPath": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI.DAL\\CineAPI.DAL.csproj"
+            "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI.DAL\\CineAPI.DAL.csproj": {
+              "projectPath": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI.DAL\\CineAPI.DAL.csproj"
             },
-            "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI.Entities\\CineAPI.Entities.csproj": {
-              "projectPath": "C:\\Users\\nfediuk\\Desktop\\CineAPI\\CineAPI.Entities\\CineAPI.Entities.csproj"
+            "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI.Entities\\CineAPI.Entities.csproj": {
+              "projectPath": "C:\\Users\\nico\\Desktop\\CineAPI\\CineAPI.Entities\\CineAPI.Entities.csproj"
             }
           }
         }
@@ -3206,7 +3206,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
