@@ -21,22 +21,6 @@ namespace CineAPI.Datos.ADO.NET
             this.logger = logger;
         }
 
-        public async Task<List<Sala>> GetSalas()
-        {
-            string query = "select * from Salas";
-
-            DataTable dt = await conexionSQL.Search(query);
-
-            var salas = dt.AsEnumerable().Select(row => new Sala
-            {
-                SALA_ID = row.Field<int>("SALA_ID"),
-                SALA_NOMBRE = row.Field<string>("SALA_NOMBRE"),
-                SALA_CAPACIDAD = row.Field<int>("SALA_CAPACIDAD")
-            }).ToList();
-
-            return salas;
-        }
-
         public async Task NuevoUsuarioCredenciales(Credenciales credenciales)
         {
             conexionSQL.AddParameter("CREDEN_CORREO", DbType.String, credenciales.CREDEN_CORREO);
@@ -182,6 +166,23 @@ namespace CineAPI.Datos.ADO.NET
 
             return peliculas;
         }
+
+        public async Task<IEnumerable<PeliculasIdDTO>> GetPeliculasId()
+        {
+            string query = "select PELI_GUID, PELI_TITULO from Peliculas";
+
+            DataTable dt = await conexionSQL.Search(query);
+
+            var peliculas = dt.AsEnumerable().Select(row => new PeliculasIdDTO
+            {
+                PELI_GUID = row.Field<string>("PELI_GUID"),
+                PELI_TITULO = row.Field<string>("PELI_TITULO")
+            });
+
+            return peliculas;
+        }
+
+        
 
         public async Task NuevaPelicula(Pelicula pelicula)
         {
@@ -371,7 +372,16 @@ namespace CineAPI.Datos.ADO.NET
                                         @HORA,
                                         @DURACION";
 
-            await conexionSQL.ExecuteQueryWithParameters(query);
+            try
+            {
+                await conexionSQL.ExecuteQueryWithParameters(query);
+            }
+            catch(Exception ex)
+            {
+                logger.LogError($"Error al crear la funcion: {ex.Message}");
+                throw;
+            }
+            
         }
 
         public async Task<IEnumerable<Funcion>> GetFunciones()
@@ -399,22 +409,9 @@ namespace CineAPI.Datos.ADO.NET
 
             string query = @"select PELI_TITULO from PELICULAS where PELI_GUID = @guid";
 
-            try
-            {
-                DataTable dt = await conexionSQL.SearchWithParameters(query);
+            DataTable dt = await conexionSQL.SearchWithParameters(query);
 
-                if(dt.Rows.Count == 0)
-                {
-                    return "";
-                }
-
-                return dt.Rows[0][0].ToString();
-
-            }
-            catch(Exception ex)
-            {
-                return null;
-            }
+            return dt.Rows[0][0].ToString();
         }
 
         public async Task<string> GetSalaNombreGUID(int guid)
@@ -423,22 +420,9 @@ namespace CineAPI.Datos.ADO.NET
 
             string query = @"select SALA_NOMBRE from SALAS where SALA_ID = @guid";
 
-            try
-            {
-                DataTable dt = await conexionSQL.SearchWithParameters(query);
+            DataTable dt = await conexionSQL.SearchWithParameters(query);
 
-                if (dt.Rows.Count == 0)
-                {
-                    return "";
-                }
-
-                return dt.Rows[0][0].ToString();
-
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return dt.Rows[0][0].ToString();
         }
 
         public async Task<bool> ExisteFuncion(string id)
@@ -453,7 +437,7 @@ namespace CineAPI.Datos.ADO.NET
             
         }
 
-        public async Task<bool> EliminarFuncion(string id)
+        public async Task EliminarFuncion(string id)
         {
             conexionSQL.AddParameter("id", DbType.String, id);
 
@@ -462,13 +446,128 @@ namespace CineAPI.Datos.ADO.NET
             try
             {
                 await conexionSQL.ExecuteQueryWithParameters(query);
-                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Error al eliminar la función: {ex.Message}");
+                throw;
+            }
+
+        }
+
+        public async Task EditarFuncion(string id, Funcion funcion)
+        {
+            conexionSQL.AddParameter("id", DbType.String, id);
+            conexionSQL.AddParameter("pelicula", DbType.String, funcion.FUNCION_PELIGUID);
+            conexionSQL.AddParameter("sala", DbType.Int32, funcion.FUNCION_SALAID);
+            conexionSQL.AddParameter("fecha", DbType.DateTime, funcion.FUNCION_FECHA);
+            conexionSQL.AddParameter("hora", DbType.Time, funcion.FUNCION_HORA);
+            conexionSQL.AddParameter("duracion", DbType.Time, funcion.FUNCION_DURACION);
+
+            string query = @"update FUNCIONES 
+                             set FUNCION_PELIGUID = @pelicula,
+                            FUNCION_SALAID = @sala,
+                            FUNCION_FECHA = @fecha,
+                            FUNCION_HORA = @hora,
+                            FUNCION_DURACION = @duracion
+                            where FUNCION_GUID = @id";
+            try
+            {
+               await conexionSQL.ExecuteQueryWithParameters(query);
             }
             catch(Exception ex)
             {
-                return false;
+                logger.LogError($"Error al modificar la función: {ex.Message}");
+                throw;
+            }
+        }
+
+
+        //SALA
+
+        public async Task<List<SalasConAsientosDTO>> GetSalasConAsientos()
+        {
+            string query = @"select SALA_NOMBRE, ASIENTO_GUID, ASIENTO_FILA, ASIENTO_NRO from SALAS join ASIENTOS
+                            on ASIENTO_SALAID = SALA_ID
+                            order by SALA_NOMBRE, ASIENTO_FILA, ASIENTO_NRO";
+
+            DataTable dt = await conexionSQL.Search(query);
+
+            var AsientosPorSala = dt.AsEnumerable().Select(row => new SalasConAsientosDTO()
+            {
+                SALA_NOMBRE = row.Field<string>("SALA_NOMBRE"),
+                Asientos = new List<AsientosDTO>
+                {
+                    new AsientosDTO
+                    {
+                        ASIENTO_GUID = row.Field<string>("ASIENTO_GUID"),
+                        ASIENTO_FILA = row.Field<int>("ASIENTO_FILA"),
+                        ASIENTO_NRO = row.Field<int>("ASIENTO_NRO")
+                    }
+                }
+            });
+
+            return AsientosPorSala.ToList();
+        }
+
+        //RESERVAS
+
+        public async Task CargarReserva(Reserva reserva)
+        {
+            conexionSQL.AddParameter("guid", DbType.String, reserva.RESER_GUID);
+            conexionSQL.AddParameter("correo", DbType.String, reserva.RESER_USRCORREO);
+            conexionSQL.AddParameter("funcion", DbType.String, reserva.RESER_FUNCIONGUID);
+            conexionSQL.AddParameter("fecha", DbType.DateTime, reserva.RESER_FECHA);
+
+            string query = @"insert into RESERVAS
+                                            (RESER_GUID,
+                                            RESER_USRCORREO,
+                                            RESER_FUNCIONGUID,
+                                            RESER_FECHA
+                                            )
+                                        VALUES
+                                            (@guid,
+                                            @correo,
+                                            @funcion,
+                                            @fecha
+                                            )";
+
+            try
+            {
+                await conexionSQL.ExecuteQueryWithParameters(query);
+            }
+            catch(Exception ex)
+            {
+                throw;
             }
             
+        }
+
+        public async Task CargarAsientosReservados(AsientoReservado asientoReservado)
+        {
+            conexionSQL.AddParameter("funcion", DbType.String, asientoReservado.ARESER_FUNCIONGUID);
+            conexionSQL.AddParameter("reserva", DbType.String, asientoReservado.ARESER_RESERGUID);
+            conexionSQL.AddParameter("asiento", DbType.String, asientoReservado.ARESER_ASIENTOGUID);
+
+            string query = @"insert into ASIENTOS_RESERVADOS
+                                                (ARESER_FUNCIONGUID,
+                                                ARESER_RESERGUID,
+                                                ARESER_ASIENTOGUID
+                                                )
+                                            values
+                                                (@funcion,
+                                                @reserva,
+                                                @asiento
+                                                )";
+
+            try
+            {
+                await conexionSQL.ExecuteQueryWithParameters(query);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

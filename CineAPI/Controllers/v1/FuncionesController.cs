@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CineAPI.Datos;
+using CineAPI.Datos.ADO.NET;
 using CineAPI.Entities;
 using CineAPI.Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace CineAPI.Controllers.v1
         private readonly IConexion conexion;
         private readonly IMapper mapper;
 
-        public FuncionesController(IConexion conexion, IMapper mapper) 
+        public FuncionesController(IConexion conexion, IMapper mapper)
         {
             this.conexion = conexion;
             this.mapper = mapper;
@@ -26,29 +27,11 @@ namespace CineAPI.Controllers.v1
 
             var funciones = await conexion.GetFunciones();
 
-            foreach(var funcionDTO in funciones)
+            foreach (var funcionDTO in funciones)
             {
                 var nombrePeli = await conexion.GetPeliculaNombreGUID(funcionDTO.FUNCION_PELIGUID);
 
-                if(nombrePeli is null)
-                {
-                    return StatusCode(500, "Error al consultar los datos");
-                }
-                if(nombrePeli == "")
-                {
-                    return BadRequest("Nombre de la pelicula no encontrado");
-                }
-
                 var salaPeli = await conexion.GetSalaNombreGUID(funcionDTO.FUNCION_SALAID);
-
-                if (salaPeli is null)
-                {
-                    return StatusCode(500, "Error al consultar los datos");
-                }
-                if (salaPeli == "")
-                {
-                    return BadRequest("Nombre de la sala no encontrado");
-                }
 
                 listadoFuncionesDTO.Add(new ListFuncionesDTO
                 {
@@ -69,24 +52,9 @@ namespace CineAPI.Controllers.v1
         [HttpPost]
         public async Task<ActionResult> Post(FuncionDTO funcionDTO)
         {
-            if(funcionDTO.FUNCION_PELICULA is null)
-            {
-                return BadRequest("Ingrese el nombre de la pelicula");
-            }
-            if (funcionDTO.FUNCION_SALA == 0)
-            {
-                return BadRequest("Ingrese una ID de sala");
-            }
+            var funcion = mapper.Map<Funcion>(funcionDTO);
 
-            var funcion = new Funcion
-            {
-                FUNCION_GUID = Guid.NewGuid().ToString(),
-                FUNCION_PELIGUID = funcionDTO.FUNCION_PELICULA,
-                FUNCION_SALAID= funcionDTO.FUNCION_SALA,
-                FUNCION_FECHA = funcionDTO.FUNCION_FECHA.Date,
-                FUNCION_HORA = funcionDTO.FUNCION_HORA,
-                FUNCION_DURACION = funcionDTO.FUNCION_DURACION
-            };
+            funcion.FUNCION_GUID = Guid.NewGuid().ToString();  
 
             await conexion.NuevaFuncion(funcion);
 
@@ -96,26 +64,30 @@ namespace CineAPI.Controllers.v1
         [HttpDelete("id")]
         public async Task<ActionResult> Delete(string idFuncion)
         {
-            if(idFuncion is null)
-            {
-                return BadRequest("Ingrese un ID de funcion");
-            }
 
             if (!await conexion.ExisteFuncion(idFuncion))
             {
                 return NotFound($"No existe la función con ID: {idFuncion}");
             }
 
-            bool eliminado = await conexion.EliminarFuncion(idFuncion);
+            await conexion.EliminarFuncion(idFuncion);
 
-            if (eliminado)
+            return Ok("Función eliminada");
+        }
+
+        [HttpPut("funcionId")]
+        public async Task<ActionResult<FuncionDTO>> Put(string funcionId, FuncionDTO funcionDTO)
+        {
+            if (!await conexion.ExisteFuncion(funcionId))
             {
-                return Ok("Funcion eliminada");
+                return NotFound($"No existe la función con ID: {funcionId}");
             }
-            else
-            {
-                return StatusCode(500, "Error al eliminar la funcion");
-            }
+
+            var funcion = mapper.Map<Funcion>(funcionDTO);
+
+            await conexion.EditarFuncion(funcionId, funcion);
+
+            return Ok(funcionDTO);
         }
     }
 }

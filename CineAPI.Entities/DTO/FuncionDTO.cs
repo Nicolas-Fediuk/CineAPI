@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -9,15 +10,19 @@ namespace CineAPI.Entities.DTO
 {
     public class FuncionDTO
     {
-        public string FUNCION_PELICULA { get; set; }
-        public int FUNCION_SALA { get; set; }
-        public DateTime FUNCION_FECHA { get; set; }
-        public string FUNCION_HORA { get; set; }
-        public string FUNCION_DURACION { get; set; }
+        [Required(ErrorMessage = "El ID de pelicula es requerido")]
+        public string FUNCION_PELIGUID { get; set; }
 
-        [JsonIgnore]
-        public TimeSpan FUNCION_HORA_TS => TimeSpan.Parse(FUNCION_HORA);
-        [JsonIgnore]
-        public TimeSpan FUNCION_DURACION_TS => TimeSpan.Parse(FUNCION_DURACION);
+        [Required]
+        public int FUNCION_SALAID { get; set; }
+
+        [Required]
+        public DateTime FUNCION_FECHA { get; set; }
+
+        [Required]
+        public string FUNCION_HORA { get; set; }
+
+        [Required]
+        public string FUNCION_DURACION { get; set; }
     }
 }

@@ -16,10 +16,5 @@ namespace CineAPI.Entities
         public string FUNCION_HORA { get; set; }
         public string FUNCION_DURACION { get; set; }
 
-       /* [JsonIgnore]
-        public TimeSpan FUNCION_HORA_TS => TimeSpan.Parse(FUNCION_HORA);
-
-        [JsonIgnore]
-        public TimeSpan FUNCION_DURACION_TS => TimeSpan.Parse(FUNCION_DURACION);*/
     }
 }

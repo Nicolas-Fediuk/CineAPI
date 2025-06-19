@@ -36,6 +36,14 @@ namespace CineAPI.Controllers.v1
             return peliculasDTO;
         }
 
+        [HttpGet("peliculasId")]
+        public async Task<List<PeliculasIdDTO>> GetPeluculasId()
+        {
+            var peliculas = await conexion.GetPeliculasId();
+
+            return peliculas.ToList();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post([FromForm] NuevaPeliculaDTO nuevaPeliculaDTO)
         {

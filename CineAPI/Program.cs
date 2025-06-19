@@ -25,6 +25,15 @@ builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivoLocal>();
 builder.Services.AddScoped<ConexionSQL>(x =>
 {
     var config = x.GetRequiredService<IConfiguration>();
+
+    //esta condicion es para hacer la conexion con la bd de mi pc de escritorio 
+    string nombrePC = Environment.MachineName;
+
+    if(nombrePC == "DESKTOP-A3FCCPG")
+    {
+        return new ConexionSQL(config.GetConnectionString("defaultConnection2"));
+    }
+
     return new ConexionSQL(config.GetConnectionString("defaultConnection"));
 });
 
@@ -88,6 +97,8 @@ if (app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

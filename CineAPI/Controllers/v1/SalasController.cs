@@ -1,6 +1,7 @@
 ﻿using CineAPI.Datos;
 using CineAPI.Datos.ADO.NET;
 using CineAPI.Entities;
+using CineAPI.Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
@@ -18,9 +19,9 @@ namespace CineAPI.Controllers.v1
         }
 
         [HttpGet]
-        public async Task<List<Sala>> Get()
+        public async Task<List<SalasConAsientosDTO>> Get()
         {
-            return await conexion.GetSalas();
+            return await conexion.GetSalasConAsientos();
         }
     }
 }

@@ -8,7 +8,10 @@ namespace CineAPI.Datos
     public interface IConexion
     {
         Task<List<UsuarioDTO>> BuscarGeneroDescrip(List<UsuarioDTO> usuarioDTOs);
-        Task<bool> EliminarFuncion(string id);
+        Task CargarAsientosReservados(AsientoReservado asientoReservado);
+        Task CargarReserva(Reserva reserva);
+        Task EditarFuncion(string id, Funcion funcion);
+        Task EliminarFuncion(string id);
         Task EliminarPelicula(string guid);
         Task<bool> ExisteFuncion(string id);
         Task<bool> ExisteUsuario(string correo);
@@ -18,9 +21,10 @@ namespace CineAPI.Datos
         Task<string> GetPeliculaGUIDNombre(string nombre);
         Task<string> GetPeliculaNombreGUID(string guid);
         Task<IEnumerable<Pelicula>> GetPeliculas();
+        Task<IEnumerable<PeliculasIdDTO>> GetPeliculasId();
         Task<string> GetPosterGuid(string guid);
         Task<string> GetSalaNombreGUID(int guid);
-        Task<List<Sala>> GetSalas();
+        Task<List<SalasConAsientosDTO>> GetSalasConAsientos();
         Task<IEnumerable<Usuario>> GetUsuarios();
         Task HacerAdmin(string correo);
         Task NuevaFuncion(Funcion funcion);
