@@ -14,6 +14,7 @@ namespace CineAPI.Datos
         Task EliminarFuncion(string id);
         Task EliminarPelicula(string guid);
         Task<bool> ExisteFuncion(string id);
+        Task<bool> ExisteReserva(string funcion, string asiento);
         Task<bool> ExisteUsuario(string correo);
         Task<List<Claim>> GetClaims(string correo);
         Task<IEnumerable<Funcion>> GetFunciones();
@@ -23,6 +24,7 @@ namespace CineAPI.Datos
         Task<IEnumerable<Pelicula>> GetPeliculas();
         Task<IEnumerable<PeliculasIdDTO>> GetPeliculasId();
         Task<string> GetPosterGuid(string guid);
+        Task<IEnumerable<DetalleReservaDTO>> GetReservas();
         Task<string> GetSalaNombreGUID(int guid);
         Task<List<SalasConAsientosDTO>> GetSalasConAsientos();
         Task<IEnumerable<Usuario>> GetUsuarios();

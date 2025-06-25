@@ -569,5 +569,50 @@ namespace CineAPI.Datos.ADO.NET
                 throw;
             }
         }
+
+        public async Task<IEnumerable<DetalleReservaDTO>> GetReservas()
+        {
+            string query = @"select RESER_GUID,
+                            RESER_USRCORREO,
+                            PELI_TITULO, 
+                            FUNCION_FECHA,
+                            FUNCION_HORA, 
+                            SALA_NOMBRE,
+                            ASIENTO_FILA,
+                            ASIENTO_NRO
+                            from ASIENTOS_RESERVADOS join RESERVAS	
+                            on ARESER_RESERGUID = RESER_GUID join FUNCIONES
+                            on RESER_FUNCIONGUID = FUNCION_GUID join PELICULAS
+                            on PELI_GUID = FUNCION_PELIGUID join ASIENTOS
+                            on ARESER_ASIENTOGUID = ASIENTO_GUID join SALAS
+                            on SALA_ID = ASIENTO_SALAID";
+
+            DataTable dt = await conexionSQL.Search(query);   
+
+            var reservas = dt.AsEnumerable().Select(row => new DetalleReservaDTO  {
+                RESER_GUID = row.Field<string>("RESER_GUID"),
+                RESER_USRCORREO = row.Field<string>("RESER_USRCORREO"),
+                PELI_TITULO = row.Field<string>("PELI_TITULO"),
+                FUNCION_FECHA = row.Field<DateTime>("FUNCION_FECHA"),
+                FUNCION_HORA = row.Field<TimeSpan>("FUNCION_HORA").ToString(),
+                SALA_NOMBRE = row.Field<string>("SALA_NOMBRE"),
+                ASIENTO_FILA = row.Field<int>("ASIENTO_FILA"),
+                ASIENTO_NRO = row.Field<int>("ASIENTO_NRO"),
+            });
+
+            return reservas;
+        }
+
+        public async Task<bool> ExisteReserva(string funcion, string asiento)
+        {
+            conexionSQL.AddParameter("funcion", DbType.String, funcion);
+            conexionSQL.AddParameter("asiento", DbType.String, asiento);
+
+            string query = @"select 1 from ASIENTOS_RESERVADOS where ARESER_FUNCIONGUID = @funcion and ARESER_RESERGUID = @asiento";
+
+            DataTable dt = await conexionSQL.SearchWithParameters(query);
+
+            return dt.Rows.Count > 0;
+        }
     }
 }

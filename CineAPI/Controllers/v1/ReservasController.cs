@@ -12,7 +12,7 @@ namespace CineAPI.Controllers.v1
 {
     [ApiController]
     [Route("api/v1/reservas")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "ADMIN")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "ADMIN")]
     public class ReservasController : ControllerBase
     {
         private readonly IConexion conexion;
@@ -27,14 +27,27 @@ namespace CineAPI.Controllers.v1
 
 
         [HttpGet]
-        public async Task<string> Get()
+        public async Task<List<DetalleReservaDTO>> Get()
         {
-            return "ok"; 
+            IEnumerable<DetalleReservaDTO> reservas = await conexion.GetReservas();
+
+            return reservas.ToList();    
+        }
+
+        [HttpGet("asientosDisponibles")]
+        public async Task<List<DetalleReservaDTO>> GetDisponibilidad(string funcion)
+        {
+
         }
 
         [HttpPost]
         public async Task<ActionResult> Post(ReservaDTO reservaDTO)
         {
+            if (await VerificarAsientos(reservaDTO))
+            {
+                return BadRequest("Asiento no disponible");
+            }
+
             try
             {
                 using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -66,6 +79,19 @@ namespace CineAPI.Controllers.v1
             {
                 return StatusCode(500, $"Error al grabar la reserva: {ex.Message}");
             }
+        }
+
+        private async Task<bool> VerificarAsientos(ReservaDTO reservaDTO)
+        {
+            foreach(var asiento in reservaDTO.RESER_ASIENTOS)
+            {
+                if(await conexion.ExisteReserva(reservaDTO.RESER_FUNCIONGUID, asiento))
+                {
+                    return true;
+                }
+            }
+
+            return false;   
         }
     }
 }
