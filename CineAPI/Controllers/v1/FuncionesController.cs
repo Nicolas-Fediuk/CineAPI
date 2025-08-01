@@ -41,7 +41,6 @@ namespace CineAPI.Controllers.v1
                     FUNCION_FECHA = funcionDTO.FUNCION_FECHA,
                     FUNCION_HORA = funcionDTO.FUNCION_HORA,
                     FUNCION_DURACION = funcionDTO.FUNCION_DURACION
-
                 });
             }
 

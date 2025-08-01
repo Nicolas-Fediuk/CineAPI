@@ -36,7 +36,7 @@ namespace CineAPI.Controllers.v1
             return peliculasDTO;
         }
 
-        [HttpGet("peliculasId")]
+        [HttpGet("peliculasConId")]
         public async Task<List<PeliculasIdDTO>> GetPeluculasId()
         {
             var peliculas = await conexion.GetPeliculasId();
@@ -56,7 +56,7 @@ namespace CineAPI.Controllers.v1
 
             try
             {               
-                conexion.NuevaPelicula(pelicula);
+                await conexion.NuevaPelicula(pelicula);
                 return Ok(pelicula);
             }
             catch (Exception ex)
@@ -66,18 +66,18 @@ namespace CineAPI.Controllers.v1
         }
 
         [HttpPut]
-        public async Task<ActionResult> ModificarPelicula(string nombre,[FromForm] NuevaPeliculaDTO peliculaDTO)
+        public async Task<ActionResult> ModificarPelicula(string id,[FromForm] NuevaPeliculaDTO peliculaDTO)
         {
-            if(nombre is null)
+            if(id is null)
             {
-                return BadRequest("Ingrese el nombre de la pelicula a modificar");
+                return BadRequest("Ingrese el id de la pelicula a modificar");
             }
 
             var peliDBGUID = await conexion.GetPeliculaGUIDNombre(nombre);
 
             if(peliDBGUID is null)
             {
-                return BadRequest("Nombre de la pelicula inexistente");
+                return NotFound("Nombre de la pelicula inexistente");
             }
 
             var pelicula = mapper.Map<Pelicula>(peliculaDTO);

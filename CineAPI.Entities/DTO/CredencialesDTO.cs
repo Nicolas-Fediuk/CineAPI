@@ -6,12 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CineAPI.Entities
+namespace CineAPI.Entities.DTO
 {
-    public class Credenciales
+    public class CredencialesDTO
     {
-        public int CREDEN_ID { get; set; }
-
         [Required]
         [EmailAddress]
         public string CREDEN_CORREO { get; set; }

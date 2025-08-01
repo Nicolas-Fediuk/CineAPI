@@ -34,6 +34,10 @@ namespace CineAPI.Mapper
             CreateMap<Funcion, ListFuncionesDTO>();
 
             CreateMap<FuncionDTO, Funcion>();
+
+            CreateMap<Asientos, AsientosDTO>();
+
+            CreateMap<CredencialesDTO, Credenciales>();
         }
 
        

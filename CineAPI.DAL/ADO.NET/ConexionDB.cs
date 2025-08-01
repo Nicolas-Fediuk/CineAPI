@@ -206,7 +206,7 @@ namespace CineAPI.Datos.ADO.NET
                                              @POSTER,
                                              @GENEROID";
 
-            conexionSQL.ExecuteQueryWithParameters(query);
+            await conexionSQL.ExecuteQueryWithParameters(query);
         }
 
         public async Task<string> GetPeliculaGUIDNombre(string nombre)
@@ -614,5 +614,84 @@ namespace CineAPI.Datos.ADO.NET
 
             return dt.Rows.Count > 0;
         }
+
+        public async Task<List<Asientos>> GetAsientosDisponibles(string funcion)
+        {
+            conexionSQL.AddParameter("funcion", DbType.String, funcion);
+
+            string query = @"select ASIENTO_GUID,ASIENTO_SALAID, ASIENTO_FILA, ASIENTO_NRO from FUNCIONES join SALAS
+                            on SALA_ID = FUNCION_SALAID join ASIENTOS
+                            on ASIENTO_SALAID= SALA_ID
+                            and not exists(select * from ASIENTOS_RESERVADOS where ARESER_FUNCIONGUID = @funcion
+                            and ARESER_ASIENTOGUID = ASIENTOS.ASIENTO_GUID)
+                            where FUNCION_GUID = @funcion";
+
+            DataTable dt = await conexionSQL.SearchWithParameters(query);
+
+            return dt.AsEnumerable().Select(row => new Asientos
+            {
+                ASIENTO_GUID = row.Field<string>("ASIENTO_GUID"),
+                ASIENTO_SALAID = row.Field<int>("ASIENTO_SALAID"),
+                ASIENTO_FILA = row.Field<int>("ASIENTO_FILA"),
+                ASIENTO_NRO = row.Field<int>("ASIENTO_NRO"),
+            }).ToList();
+        }
+
+        public async Task EliminarReserva(string reserva)
+        {
+            conexionSQL.AddParameter("reserva", DbType.String, reserva);
+
+            string query = @"delete from RESERVAS where RESER_GUID = @reserva";
+
+            await conexionSQL.ExecuteQueryWithParameters(query);  
+        }
+
+        public async Task EliminarAsientosReservados(string reserva)
+        {
+            conexionSQL.AddParameter("reserva", DbType.String, reserva);
+
+            string query = @"delete from ASIENTOS_RESERVADOS where ARESER_RESERGUID = @reserva";
+
+            await conexionSQL.ExecuteQueryWithParameters(query);
+        }
+
+        public async Task<IEnumerable<DetalleReservaDTO>> GetReservasPorUsuario(string correo)
+        {
+            conexionSQL.AddParameter("correo", DbType.String, correo);
+
+            string query = @"select RESER_GUID,
+                            RESER_USRCORREO,
+                            PELI_TITULO, 
+                            FUNCION_FECHA,
+                            FUNCION_HORA, 
+                            SALA_NOMBRE,
+                            ASIENTO_FILA,
+                            ASIENTO_NRO
+                            from ASIENTOS_RESERVADOS join RESERVAS	
+                            on ARESER_RESERGUID = RESER_GUID join FUNCIONES
+                            on RESER_FUNCIONGUID = FUNCION_GUID join PELICULAS
+                            on PELI_GUID = FUNCION_PELIGUID join ASIENTOS
+                            on ARESER_ASIENTOGUID = ASIENTO_GUID join SALAS
+                            on SALA_ID = ASIENTO_SALAID
+                            where RESER_USRCORREO = @correo";
+
+            DataTable dt = await conexionSQL.Search(query);
+
+            var reservas = dt.AsEnumerable().Select(row => new DetalleReservaDTO
+            {
+                RESER_GUID = row.Field<string>("RESER_GUID"),
+                RESER_USRCORREO = row.Field<string>("RESER_USRCORREO"),
+                PELI_TITULO = row.Field<string>("PELI_TITULO"),
+                FUNCION_FECHA = row.Field<DateTime>("FUNCION_FECHA"),
+                FUNCION_HORA = row.Field<TimeSpan>("FUNCION_HORA").ToString(),
+                SALA_NOMBRE = row.Field<string>("SALA_NOMBRE"),
+                ASIENTO_FILA = row.Field<int>("ASIENTO_FILA"),
+                ASIENTO_NRO = row.Field<int>("ASIENTO_NRO"),
+            });
+
+            return reservas;
+        }
+
+        
     }
 }

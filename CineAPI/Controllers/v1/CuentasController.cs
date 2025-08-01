@@ -64,7 +64,7 @@ namespace CineAPI.Controllers.v1
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<RespuestaAutenticacionDTO>> Login(Credenciales credenciales)
+        public async Task<ActionResult<RespuestaAutenticacionDTO>> Login(CredencialesDTO credenciales)
         {
             var password = await conexion.GetPasswordUsr(credenciales.CREDEN_CORREO);
 
@@ -77,7 +77,8 @@ namespace CineAPI.Controllers.v1
 
             if (credenciales.CREDEN_PASSWORD == password)
             {
-                var respuesta = await CrearToken(credenciales);
+                var credencialesProduccion = mapper.Map<Credenciales>(credenciales);
+                var respuesta = await CrearToken(credencialesProduccion);
                 return Ok(respuesta);
             }
             else

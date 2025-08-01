@@ -34,10 +34,30 @@ namespace CineAPI.Controllers.v1
             return reservas.ToList();    
         }
 
-        [HttpGet("asientosDisponibles")]
-        public async Task<List<DetalleReservaDTO>> GetDisponibilidad(string funcion)
+        [HttpGet("miReserva")]
+        public async Task<List<DetalleReservaDTO>> GetPorUsuario()
         {
+            var correo = User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
+            IEnumerable<DetalleReservaDTO> reservas = await conexion.GetReservasPorUsuario(correo.ToString());
+
+            return reservas.ToList();
+        }
+
+
+        [HttpGet("asientosDisponibles")]
+        public async Task<ActionResult<List<AsientosDTO>>> GetDisponibilidad(string funcion)
+        {
+            if (!await conexion.ExisteFuncion(funcion))
+            {
+                return NotFound("La función ingresada no existe");
+            }
+
+            var asientosDisponibles = await conexion.GetAsientosDisponibles(funcion);
+
+            var asientosDTO = mapper.Map<List<AsientosDTO>>(asientosDisponibles);
+
+            return Ok(asientosDTO);
         }
 
         [HttpPost]
@@ -92,6 +112,28 @@ namespace CineAPI.Controllers.v1
             }
 
             return false;   
+        }
+
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(string reserva)
+        {
+            try
+            {
+                using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    await conexion.EliminarReserva(reserva);
+                    await conexion.EliminarAsientosReservados(reserva);
+
+                    scope.Complete();
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al eliminar la reserva: {ex.Message}");
+            }
         }
     }
 }
